@@ -6,6 +6,17 @@
         <Setter Property="BorderThickness" Value="0,0,0,1"/>
     </Style>
 
+    <Style x:Key="TextBoxStyle" TargetType="TextBox">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Margin" Value="2"/>
+    </Style>
+
+    <!--Group Styles-->
+    <Style x:Key="GroupHeaderGridStyle" TargetType="Grid">
+        <Setter Property="Background" Value="DarkSeaGreen"/>
+    </Style>
+
     <Style x:Key="GroupGridLineStyle" TargetType="Border">
         <Setter Property="BorderBrush" Value="LightGray"/>
         <Setter Property="BorderThickness" Value="0,0,0,0"/>
@@ -16,9 +27,15 @@
         <Setter Property="BorderThickness" Value="0,0,0,1"/>
     </Style>
 
-    <Style x:Key="TextBoxStyle" TargetType="TextBox">
-        <Setter Property="BorderThickness" Value="0"/>
+    <Style x:Key="GroupHeaderTextBlockStyle" TargetType="TextBlock">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Margin" Value="2"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+
+    <Style x:Key="GroupButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value ="LightGreen"/>
+        <!--<Setter Property="Margin" Value="2"/>-->
+        <Setter Property="FontWeight" Value="Bold"/>
     </Style>
 </ResourceDictionary>

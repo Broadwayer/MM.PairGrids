@@ -16,7 +16,9 @@
 
     <!-- Template for integer -->
     <DataTemplate x:Key="IntegerContentTemplate">
-        <TextBox Text="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource TextBoxStyle}">
+        <TextBox 
+            local:IntegerBinding.Value = "{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Style="{DynamicResource TextBoxStyle}">
             <TextBox.InputBindings>
                 <KeyBinding Key="Up" 
                             Command="{Binding 
@@ -30,8 +32,11 @@
         </TextBox>
     </DataTemplate>
 
+    <!-- Template for float -->
     <DataTemplate x:Key="FloatContentTemplate">
-        <TextBox local:FloatBinding.Value = "{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+        <TextBox 
+            local:FloatBinding.Value = "{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Style="{DynamicResource TextBoxStyle}">
             <TextBox.InputBindings>
                 <KeyBinding Key="Up" 
                             Command="{Binding 
@@ -45,8 +50,11 @@
         </TextBox>
     </DataTemplate>
 
+    <!-- Template for double -->
     <DataTemplate x:Key="DoubleContentTemplate">
-        <TextBox local:DoubleBinding.Value = "{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+        <TextBox 
+            local:DoubleBinding.Value = "{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Style="{DynamicResource TextBoxStyle}">
             <TextBox.InputBindings>
                 <KeyBinding Key="Up" 
                             Command="{Binding 
@@ -113,7 +121,7 @@
             </Grid.RowDefinitions>
             <!-- Button and name of group -->
             <Border Grid.ColumnSpan="3" Grid.Row="0" Style="{DynamicResource GroupGridLineStyle}">
-                <Grid Grid.ColumnSpan="3" Grid.Row="0" Background="DarkSeaGreen">
+                <Grid Grid.ColumnSpan="3" Grid.Row="0" Style="{DynamicResource GroupHeaderGridStyle}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="20"/>
@@ -121,10 +129,11 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Text="{Binding Indentation}"/>
                     <Button Grid.Column="1"
+                            Style="{DynamicResource GroupButtonStyle}"
                             Content="{Binding IsExpanded, Converter={StaticResource BoolToExpandedCollapsedSymbolConverter}}"
                             Command="{Binding RelativeSource={RelativeSource AncestorType=local:HierarchicalPairGrid}, Path=ToggleGroupCommand}"
                             CommandParameter="{Binding}"/>
-                    <TextBlock Grid.Column="2" Text="{Binding Name}" FontWeight="Bold" Margin="10,0,0,0"/>
+                    <TextBlock Grid.Column="2" Text="{Binding Name}" Style="{DynamicResource GroupHeaderTextBlockStyle}" Margin="10,0,0,0"/>
                 </Grid>
             </Border>
             <!-- Child elements -->

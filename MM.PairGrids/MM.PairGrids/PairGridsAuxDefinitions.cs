@@ -206,10 +206,87 @@ namespace MM.PairGrids
             {
                 SetValue(textBox, result);
                 textBox.BorderBrush = System.Windows.Media.Brushes.Black;
+                textBox.BorderThickness = new Thickness(0);
             }
             else
             {
                 textBox.BorderBrush = System.Windows.Media.Brushes.Red;
+                textBox.BorderThickness = new Thickness(1);
+                textBox.Focus();
+            }
+        }
+    }
+
+    public class IntegerBinding : DependencyObject
+    {
+        public static readonly DependencyProperty ValueProperty =
+            DependencyProperty.RegisterAttached(
+                "Value",
+                typeof(int),
+                typeof(IntegerBinding),
+                new PropertyMetadata(0, OnValueChanged));
+
+        public static int GetValue(DependencyObject obj) => (int)obj.GetValue(ValueProperty);
+
+        public static void SetValue(DependencyObject obj, int value) => obj.SetValue(ValueProperty, value);
+        private static void OnValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is TextBox textBox)
+            {
+                textBox.PreviewMouseDown -= OnPreviewMouseDown;
+                textBox.PreviewLostKeyboardFocus -= OnLostFocus;
+                textBox.TextChanged -= OnTextChanged;
+                if (e.NewValue is int)
+                    textBox.Text = ((int)e.NewValue).ToString(CultureInfo.CurrentCulture);
+                textBox.TextChanged += OnTextChanged;
+                textBox.PreviewLostKeyboardFocus += OnLostFocus;
+                textBox.PreviewMouseDown += OnPreviewMouseDown;
+            }
+        }
+
+        private static void OnLostFocus(object sender, RoutedEventArgs e)
+        {
+            if (sender != null &&
+                sender is TextBox textBox &&
+                !int.TryParse(textBox.Text, NumberStyles.Any, CultureInfo.CurrentCulture, out int result))
+            {
+                MessageBox.Show("Invalid value");
+                e.Handled = true;
+            }
+        }
+
+        private static void OnPreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (sender != null &&
+                sender is TextBox textBox &&
+                !float.TryParse(textBox.Text, NumberStyles.Any, CultureInfo.CurrentCulture, out float result))
+            {
+                MessageBox.Show("Invalid value");
+                e.Handled = true;
+                textBox.Focus();
+            }
+        }
+
+        private static void OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (sender is TextBox textBox)
+            {
+                ValidateTextBox(textBox);
+            }
+        }
+
+        private static void ValidateTextBox(TextBox textBox)
+        {
+            if (int.TryParse(textBox.Text, NumberStyles.Any, CultureInfo.CurrentCulture, out int result))
+            {
+                SetValue(textBox, result);
+                textBox.BorderBrush = System.Windows.Media.Brushes.Black;
+                textBox.BorderThickness = new Thickness(0);
+            }
+            else
+            {
+                textBox.BorderBrush = System.Windows.Media.Brushes.Red;
+                textBox.BorderThickness = new Thickness(1);
                 textBox.Focus();
             }
         }
