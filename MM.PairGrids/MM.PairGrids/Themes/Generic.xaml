@@ -1,0 +1,11 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:MM.PairGrids">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/MM.PairGrids;component/Themes/CommonStyles.xaml"/>
+        <ResourceDictionary Source="/MM.PairGrids;component/Themes/DataTemplates.xaml"/>
+        <ResourceDictionary Source="/MM.PairGrids;component/Themes/SimplePairGrid.xaml"/>
+        <ResourceDictionary Source="/MM.PairGrids;component/Themes/HierarchicalPairGrid.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

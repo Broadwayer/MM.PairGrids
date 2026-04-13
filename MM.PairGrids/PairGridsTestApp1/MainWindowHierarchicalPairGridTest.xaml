@@ -1,0 +1,36 @@
+﻿<Window x:Class="PairGridsTestApp1.MainWindowHierarchicalPairGridTest"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PairGridsTestApp1"
+        xmlns:PairGrids="clr-namespace:MM.PairGrids;assembly=MM.PairGrids"
+        mc:Ignorable="d"
+        Title="MainWindowHierarchicalPairGridTest" Height="450" Width="800">
+    <Grid Background="AliceBlue">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!--<Grid Background="Yellow" Grid.Column="0" Margin="10,10,300,10">-->
+        <Grid Background="White" Grid.Column="0" Margin="10,10,300,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <PairGrids:HierarchicalPairGrid
+            Grid.Column="0"
+            x:Name="Hpg"
+            ItemsSource="{Binding Ocol}"
+            HorizontalAlignment="Stretch"
+            Margin="2,2,2,2"  
+            />
+            <!--<PairGrids:HierarchicalPairGrid
+            Grid.Column="0"
+            x:Name="Spg"
+            ItemsSource="{Binding Ocol}"
+            HorizontalAlignment="Left"
+            Margin="10,10,400,10"  
+            />-->
+        </Grid>
+    </Grid>
+</Window>

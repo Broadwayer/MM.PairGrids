@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="MM.PairGrids/MM.PairGrids.csproj" />
+  <Project Path="PairGridsTestApp1/PairGridsTestApp1.csproj" />
+</Solution>

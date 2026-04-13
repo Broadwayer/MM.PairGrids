@@ -1,0 +1,145 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:MM.PairGrids">
+
+    <local:BoolToExpandedCollapsedSymbolConverter x:Key="BoolToExpandedCollapsedSymbolConverter"/>
+    
+    <!-- Template for strings -->
+    <DataTemplate x:Key="StringContentTemplate">
+        <TextBox Text="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource TextBoxStyle}"/>
+    </DataTemplate>
+
+    <!-- Template for boolean -->
+    <DataTemplate x:Key="BooleanContentTemplate">
+        <CheckBox IsChecked="{Binding Value, Mode=TwoWay}"/>
+    </DataTemplate>
+
+    <!-- Template for integer -->
+    <DataTemplate x:Key="IntegerContentTemplate">
+        <TextBox Text="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource TextBoxStyle}">
+            <TextBox.InputBindings>
+                <KeyBinding Key="Up" 
+                            Command="{Binding 
+                            RelativeSource={RelativeSource AncestorType=local:HierarchicalPairGrid}, Path=NumberIncrementCommand}"
+                            CommandParameter="{Binding}"/>
+                <KeyBinding Key="Down" 
+                            Command="{Binding 
+                            RelativeSource={RelativeSource AncestorType=local:HierarchicalPairGrid}, Path=NumberDecrementCommand}"
+                            CommandParameter="{Binding}"/>
+            </TextBox.InputBindings>
+        </TextBox>
+    </DataTemplate>
+
+    <DataTemplate x:Key="FloatContentTemplate">
+        <TextBox local:FloatBinding.Value = "{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <TextBox.InputBindings>
+                <KeyBinding Key="Up" 
+                            Command="{Binding 
+                            RelativeSource={RelativeSource AncestorType=local:HierarchicalPairGrid}, Path=NumberIncrementCommand}"
+                            CommandParameter="{Binding}"/>
+                <KeyBinding Key="Down" 
+                            Command="{Binding 
+                            RelativeSource={RelativeSource AncestorType=local:HierarchicalPairGrid}, Path=NumberDecrementCommand}"
+                            CommandParameter="{Binding}"/>
+            </TextBox.InputBindings>
+        </TextBox>
+    </DataTemplate>
+
+    <DataTemplate x:Key="DoubleContentTemplate">
+        <TextBox local:DoubleBinding.Value = "{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <TextBox.InputBindings>
+                <KeyBinding Key="Up" 
+                            Command="{Binding 
+                            RelativeSource={RelativeSource AncestorType=local:HierarchicalPairGrid}, Path=NumberIncrementCommand}"
+                            CommandParameter="{Binding}"/>
+                <KeyBinding Key="Down" 
+                            Command="{Binding 
+                            RelativeSource={RelativeSource AncestorType=local:HierarchicalPairGrid}, Path=NumberDecrementCommand}"
+                            CommandParameter="{Binding}"/>
+            </TextBox.InputBindings>
+        </TextBox>
+    </DataTemplate>
+
+    <!-- Template for options -->
+    <DataTemplate x:Key="OptionsContentTemplate">
+        <ComboBox ItemsSource="{Binding Options}"
+                  SelectedItem="{Binding Value, Mode=TwoWay}"
+                  Margin="2"/>
+    </DataTemplate>
+
+    <local:BasicContentTemplateSelector x:Key="BasicContentTemplateSelector"
+          StringContentTemplate="{StaticResource StringContentTemplate}"
+          BooleanContentTemplate="{StaticResource BooleanContentTemplate}"
+          IntegerContentTemplate="{StaticResource IntegerContentTemplate}"
+          FloatContentTemplate="{StaticResource FloatContentTemplate}"
+          DoubleContentTemplate="{StaticResource DoubleContentTemplate}"
+          OptionsContentTemplate="{StaticResource OptionsContentTemplate}"/>
+
+    <!-- Template for ValueHolder -->
+    <DataTemplate x:Key="ValueHolderItemTemplate">
+        <Border Style="{DynamicResource GroupItemsGridLineStyle}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="NameColumn"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="{Binding Indentation}"/>
+                    <TextBlock Grid.Column="1" Text="{Binding Name}" IsManipulationEnabled="True"/>
+                </Grid>
+                <ContentControl Grid.Column="2"
+                Content="{Binding}"
+                ContentTemplateSelector="{StaticResource BasicContentTemplateSelector}"/>
+            </Grid>
+        </Border>
+    </DataTemplate>
+
+    <!-- Template for group -->
+    <DataTemplate x:Key="GroupItemTemplate">
+        <Grid Cursor="">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" SharedSizeGroup="NameColumn"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <!-- Button and name of group -->
+            <Border Grid.ColumnSpan="3" Grid.Row="0" Style="{DynamicResource GroupGridLineStyle}">
+                <Grid Grid.ColumnSpan="3" Grid.Row="0" Background="DarkSeaGreen">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="{Binding Indentation}"/>
+                    <Button Grid.Column="1"
+                            Content="{Binding IsExpanded, Converter={StaticResource BoolToExpandedCollapsedSymbolConverter}}"
+                            Command="{Binding RelativeSource={RelativeSource AncestorType=local:HierarchicalPairGrid}, Path=ToggleGroupCommand}"
+                            CommandParameter="{Binding}"/>
+                    <TextBlock Grid.Column="2" Text="{Binding Name}" FontWeight="Bold" Margin="10,0,0,0"/>
+                </Grid>
+            </Border>
+            <!-- Child elements -->
+            <Border Grid.ColumnSpan="3" Grid.Row="1" Style="{DynamicResource GroupItemsGridLineStyle}">
+                <Grid Grid.ColumnSpan="3" Grid.Row="1">
+                    <ItemsControl ItemsSource="{Binding SubItems}"
+                                  ItemTemplateSelector="{DynamicResource ItemTemplateSelector}"
+                                  Visibility="{Binding ChildrenVisibility}"/>
+                </Grid>
+            </Border>
+        </Grid>
+    </DataTemplate>
+
+    <local:ItemTemplateSelector x:Key="ItemTemplateSelector"
+          ValueHolderItemTemplate="{StaticResource ValueHolderItemTemplate}"
+          GroupItemTemplate="{StaticResource GroupItemTemplate}"/>
+
+</ResourceDictionary>
