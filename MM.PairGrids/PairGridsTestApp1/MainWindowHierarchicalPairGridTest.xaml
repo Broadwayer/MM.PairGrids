@@ -22,14 +22,20 @@
             x:Name="Hpg"
             ItemsSource="{Binding Ocol}"
             HorizontalAlignment="Stretch"
-            Margin="2,2,2,2"  
+            Margin="2,2,2,2"
+            IntegerIncrementStep="-3"
+            FloatIncrementStep="0.4"
+            DoubleIncrementStep="0.5"
             />
             <!--<PairGrids:HierarchicalPairGrid
             Grid.Column="0"
             x:Name="Spg"
             ItemsSource="{Binding Ocol}"
             HorizontalAlignment="Left"
-            Margin="10,10,400,10"  
+            Margin="10,10,400,10" 
+            IntegerIncrementStep="3"
+            FloatIncrementStep="0.4"
+            DoubleIncrementStep="0.5"
             />-->
         </Grid>
     </Grid>

@@ -69,11 +69,38 @@ namespace MM.PairGrids
             set { SetValue(ColumnNameWidthProperty, value); }
         }
 
+        public static readonly DependencyProperty IntegerIncrementStepProperty =
+            DependencyProperty.Register("IntegerIncrementStep", typeof(int), typeof(HierarchicalPairGrid), new PropertyMetadata(1));
+
+        public int IntegerIncrementStep
+        {
+            get { return (int)GetValue(IntegerIncrementStepProperty); }
+            set { SetValue(IntegerIncrementStepProperty, value); }
+        }
+
+        public static readonly DependencyProperty FloatIncrementStepProperty =
+            DependencyProperty.Register("FloatIncrementStep", typeof(float), typeof(HierarchicalPairGrid), new PropertyMetadata(1.0f));
+
+        public float FloatIncrementStep
+        {
+            get { return (float)GetValue(FloatIncrementStepProperty); }
+            set { SetValue(FloatIncrementStepProperty, value); }
+        }
+
+        public static readonly DependencyProperty DoubleIncrementStepProperty =
+            DependencyProperty.Register("DoubleIncrementStep", typeof(double), typeof(HierarchicalPairGrid), new PropertyMetadata(1.0));
+
+        public double DoubleIncrementStep
+        {
+            get { return (double)GetValue(DoubleIncrementStepProperty); }
+            set { SetValue(DoubleIncrementStepProperty, value); }
+        }
+
         public HierarchicalPairGrid()
         {
             ToggleGroupCommand = new ExecuteToggleGroup();
-            NumberIncrementCommand = new ExecuteNumberIncrement();
-            NumberDecrementCommand = new ExecuteNumberDecrement();
+            NumberIncrementCommand = new ExecuteNumberIncrement() { Grid = this };
+            NumberDecrementCommand = new ExecuteNumberDecrement() { Grid = this };
         }
 
         public class ExecuteToggleGroup : ICommand
@@ -94,6 +121,8 @@ namespace MM.PairGrids
 
         public class ExecuteNumberIncrement : ICommand
         {
+            public HierarchicalPairGrid? Grid {  get; set; }
+
             public event EventHandler? CanExecuteChanged;
             public bool CanExecute(object? parameter)
             {
@@ -103,21 +132,23 @@ namespace MM.PairGrids
             {
                 if (parameter is TypedItem<int> intItem)
                 {
-                    intItem.Value += 1;
+                    intItem.Value += (Grid != null)? Grid.IntegerIncrementStep : 1;
                 }
                 else if (parameter is TypedItem<float> floatItem)
                 {
-                    floatItem.Value += 1.0f;
+                    floatItem.Value += (Grid != null) ? Grid.FloatIncrementStep : 1.0f;
                 }
                 else if (parameter is TypedItem<double> doubleItem)
                 {
-                    doubleItem.Value += 1.0;
+                    doubleItem.Value += (Grid != null) ? Grid.DoubleIncrementStep : 1.0;
                 }
             }
         }
 
         public class ExecuteNumberDecrement : ICommand
         {
+            public HierarchicalPairGrid? Grid { get; set; }
+
             public event EventHandler? CanExecuteChanged;
             public bool CanExecute(object? parameter)
             {
@@ -127,15 +158,15 @@ namespace MM.PairGrids
             {
                 if (parameter is TypedItem<int> intItem)
                 {
-                    intItem.Value -= 1;
+                    intItem.Value -= (Grid != null) ? Grid.IntegerIncrementStep : 1;
                 }
                 else if (parameter is TypedItem<float> floatItem)
                 {
-                    floatItem.Value -= 1.0f;
+                    floatItem.Value -= (Grid != null) ? Grid.FloatIncrementStep : 1.0f;
                 }
                 else if (parameter is TypedItem<double> doubleItem)
                 {
-                    doubleItem.Value -= 1.0;
+                    doubleItem.Value -= (Grid != null) ? Grid.DoubleIncrementStep : 1.0;
                 }
             }
         }
