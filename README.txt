@@ -1,4 +1,4 @@
-# MM.PairGrids / MM.СеткиПар / MM.СіткиПар
+# MM.PairGrids
 
 [**English**](#english)   [**Русский**](#русский) | [**Українська**](#українська) | [**Deutsch**](#deutsch)
 
