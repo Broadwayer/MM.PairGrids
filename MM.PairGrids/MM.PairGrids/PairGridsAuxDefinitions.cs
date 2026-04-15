@@ -81,6 +81,17 @@ namespace MM.PairGrids
 
         public static void SetValue(DependencyObject obj, double value) => obj.SetValue(ValueProperty, value);
 
+        public static readonly DependencyProperty InvalidValueMessageProperty =
+            DependencyProperty.RegisterAttached(
+                "InvalidValueMessage",
+                typeof(string),
+                typeof(DoubleBinding),
+                new PropertyMetadata("Invalid value"));
+
+        public static string GetInvalidValueMessage(DependencyObject obj) => (string)obj.GetValue(InvalidValueMessageProperty);
+        
+        public static void SetInvalidValueMessage(DependencyObject obj, string value) => obj.SetValue(InvalidValueMessageProperty, value);
+
         private static void OnValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is TextBox textBox)
@@ -102,7 +113,7 @@ namespace MM.PairGrids
                 sender is TextBox textBox &&
                 !double.TryParse(textBox.Text, NumberStyles.Any, CultureInfo.CurrentCulture, out double result))
             {
-                MessageBox.Show("Invalid value");
+                MessageBox.Show(GetInvalidValueMessage(textBox));
                 e.Handled = true;
             }
         }
@@ -113,7 +124,7 @@ namespace MM.PairGrids
                 sender is TextBox textBox &&
                 !double.TryParse(textBox.Text, NumberStyles.Any, CultureInfo.CurrentCulture, out double result))
             {
-                MessageBox.Show("Invalid value");
+                MessageBox.Show(GetInvalidValueMessage(textBox));
                 e.Handled = true;
                 textBox.Focus();
             }
@@ -154,6 +165,18 @@ namespace MM.PairGrids
         public static float GetValue(DependencyObject obj) => (float)obj.GetValue(ValueProperty);
 
         public static void SetValue(DependencyObject obj, float value) => obj.SetValue(ValueProperty, value);
+        
+        public static readonly DependencyProperty InvalidValueMessageProperty =
+            DependencyProperty.RegisterAttached(
+                "InvalidValueMessage",
+                typeof(string),
+                typeof(FloatBinding),
+                new PropertyMetadata("Invalid value"));
+
+        public static string GetInvalidValueMessage(DependencyObject obj) => (string)obj.GetValue(InvalidValueMessageProperty);
+
+        public static void SetInvalidValueMessage(DependencyObject obj, string value) => obj.SetValue(InvalidValueMessageProperty, value);
+
         private static void OnValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is TextBox textBox)
@@ -175,7 +198,7 @@ namespace MM.PairGrids
                 sender is TextBox textBox &&
                 !float.TryParse(textBox.Text, NumberStyles.Any, CultureInfo.CurrentCulture, out float result))
             {
-                MessageBox.Show("Invalid value");
+                MessageBox.Show(GetInvalidValueMessage(textBox));
                 e.Handled = true;
             }
         }
@@ -186,7 +209,7 @@ namespace MM.PairGrids
                 sender is TextBox textBox &&
                 !float.TryParse(textBox.Text, NumberStyles.Any, CultureInfo.CurrentCulture, out float result))
             {
-                MessageBox.Show("Invalid value");
+                MessageBox.Show(GetInvalidValueMessage(textBox));
                 e.Handled = true;
                 textBox.Focus();
             }
@@ -229,6 +252,17 @@ namespace MM.PairGrids
         public static int GetValue(DependencyObject obj) => (int)obj.GetValue(ValueProperty);
 
         public static void SetValue(DependencyObject obj, int value) => obj.SetValue(ValueProperty, value);
+
+        public static readonly DependencyProperty InvalidValueMessageProperty =
+            DependencyProperty.RegisterAttached(
+                "InvalidValueMessage",
+                typeof(string),
+                typeof(IntegerBinding),
+                new PropertyMetadata("Invalid value"));
+
+        public static string GetInvalidValueMessage(DependencyObject obj) => (string)obj.GetValue(InvalidValueMessageProperty);
+        public static void SetInvalidValueMessage(DependencyObject obj, string value) => obj.SetValue(InvalidValueMessageProperty, value);
+
         private static void OnValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is TextBox textBox)
@@ -250,7 +284,7 @@ namespace MM.PairGrids
                 sender is TextBox textBox &&
                 !int.TryParse(textBox.Text, NumberStyles.Any, CultureInfo.CurrentCulture, out int result))
             {
-                MessageBox.Show("Invalid value");
+                MessageBox.Show(GetInvalidValueMessage(textBox));
                 e.Handled = true;
             }
         }
@@ -261,7 +295,7 @@ namespace MM.PairGrids
                 sender is TextBox textBox &&
                 !float.TryParse(textBox.Text, NumberStyles.Any, CultureInfo.CurrentCulture, out float result))
             {
-                MessageBox.Show("Invalid value");
+                MessageBox.Show(GetInvalidValueMessage(textBox));
                 e.Handled = true;
                 textBox.Focus();
             }

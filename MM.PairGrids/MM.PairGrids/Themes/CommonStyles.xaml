@@ -35,7 +35,6 @@
 
     <Style x:Key="GroupButtonStyle" TargetType="Button">
         <Setter Property="Background" Value ="LightGreen"/>
-        <!--<Setter Property="Margin" Value="2"/>-->
         <Setter Property="FontWeight" Value="Bold"/>
     </Style>
 </ResourceDictionary>
