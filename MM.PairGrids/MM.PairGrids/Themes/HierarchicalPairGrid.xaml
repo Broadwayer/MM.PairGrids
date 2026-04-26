@@ -26,29 +26,30 @@
                     <Border 
                             BorderBrush="DarkSeaGreen"
                             BorderThickness="2">
-
-                        <Grid IsSharedSizeScope="True" Cursor="">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition SharedSizeGroup="NameColumn"
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                            <Grid IsSharedSizeScope="True" Cursor="">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition SharedSizeGroup="NameColumn"
                                                   Width="{Binding ColumnNameWidth,
                                 RelativeSource={RelativeSource TemplatedParent}, 
                                 Mode=TwoWay}"/>
-                                <ColumnDefinition Width="5"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="5"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
 
-                            <!-- GridSplitter for changing column widths -->
-                            <GridSplitter x:Name="PART_Splitter" Grid.Column="1" Width="5" Background="Gray" HorizontalAlignment="Stretch" ShowsPreview="False" Cursor="SizeWE"/>
+                                <!-- GridSplitter for changing column widths -->
+                                <GridSplitter x:Name="PART_Splitter" Grid.Column="1" Width="5" Background="Gray" HorizontalAlignment="Stretch" ShowsPreview="False" Cursor="SizeWE"/>
 
-                            <ItemsControl x:Name="PART_ItemsControl" Grid.ColumnSpan="3" ItemsSource="{TemplateBinding ItemsSource}"
+                                <ItemsControl x:Name="PART_ItemsControl" Grid.ColumnSpan="3" ItemsSource="{TemplateBinding ItemsSource}"
                                 VirtualizingStackPanel.IsVirtualizing="False"
                                 ItemTemplateSelector="{DynamicResource ItemTemplateSelector}" 
                                 Cursor="" Visibility="{TemplateBinding Visibility}">
-                            </ItemsControl>
-                        </Grid>
+                                </ItemsControl>
+                            </Grid>
+                        </ScrollViewer>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
