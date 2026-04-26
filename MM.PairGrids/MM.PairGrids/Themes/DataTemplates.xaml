@@ -11,7 +11,7 @@
 
     <!-- Template for boolean -->
     <DataTemplate x:Key="BooleanContentTemplate">
-        <CheckBox IsChecked="{Binding Value, Mode=TwoWay}"/>
+        <CheckBox IsChecked="{Binding Value, Mode=TwoWay}" Style="{DynamicResource CheckBoxStyle}"/>
     </DataTemplate>
 
     <!-- Template for integer -->
@@ -69,11 +69,25 @@
     </DataTemplate>
 
     <!-- Template for options -->
+    <!--<DataTemplate x:Key="OptionsContentTemplate">
+        <ComboBox ItemsSource="{Binding Options}"
+                  SelectedItem="{Binding Value, Mode=TwoWay}"
+                  Margin="0">
+            <ComboBox.ItemContainerStyle>
+                <Style TargetType="ComboBoxItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                </Style>
+            </ComboBox.ItemContainerStyle>
+        </ComboBox>
+    </DataTemplate>-->
     <DataTemplate x:Key="OptionsContentTemplate">
         <ComboBox ItemsSource="{Binding Options}"
                   SelectedItem="{Binding Value, Mode=TwoWay}"
-                  Margin="2"/>
+                  Margin="0"
+                  Style="{DynamicResource EditableComboBoxStyle}"/>
     </DataTemplate>
+
 
     <local:BasicContentTemplateSelector x:Key="BasicContentTemplateSelector"
           StringContentTemplate="{StaticResource StringContentTemplate}"
@@ -98,9 +112,10 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Text="{Binding Indentation}"/>
-                    <TextBlock Grid.Column="1" Text="{Binding Name}" IsManipulationEnabled="True"/>
+                    <TextBlock Grid.Column="1" Text="{Binding Name}" IsManipulationEnabled="True" VerticalAlignment="Center"/>
                 </Grid>
                 <ContentControl Grid.Column="2"
+                                Height="18"
                 Content="{Binding}"
                 ContentTemplateSelector="{StaticResource BasicContentTemplateSelector}"/>
             </Grid>
